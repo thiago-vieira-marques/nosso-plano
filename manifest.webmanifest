@@ -1,12 +1,17 @@
 {
+  "id": "/nosso-plano/",
   "name": "Nosso Plano",
   "short_name": "Nosso Plano",
-  "start_url": "./",
-  "display": "browser",
+  "description": "Controle financeiro da família",
+  "start_url": "/nosso-plano/",
+  "scope": "/nosso-plano/",
+  "display": "standalone",
   "background_color": "#5E2944",
   "theme_color": "#894A68",
   "icons": [
-    { "src": "icone-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "icone-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "icone-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icone-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icone-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icone-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }
