@@ -3,8 +3,8 @@
   "short_name": "Nosso Plano",
   "start_url": "./",
   "display": "browser",
-  "background_color": "#4A3366",
-  "theme_color": "#6B538C",
+  "background_color": "#5E2944",
+  "theme_color": "#894A68",
   "icons": [
     { "src": "icone-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
     { "src": "icone-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
