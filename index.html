@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nosso Plano</title>
+  <meta name="theme-color" content="#6B538C">
+  <meta name="apple-mobile-web-app-title" content="Nosso Plano">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <style>
+    body { margin: 0; min-height: 100vh; display: grid; place-content: center; text-align: center; gap: 16px;
+      background: linear-gradient(135deg, #7A5FA0, #4A3366); color: #EDDCFF; font-family: Roboto, system-ui, sans-serif; }
+    img { width: 96px; height: 96px; border-radius: 24px; margin: 0 auto; box-shadow: 0 4px 16px rgb(0 0 0 / .3); }
+    h1 { margin: 0; font-size: 1.5rem; font-weight: 600; color: #fff; }
+    a { color: #EDDCFF; font-size: .9375rem; }
+    .instalar { max-width: 320px; margin: 8px auto 0; text-align: left; background: rgb(255 255 255 / .12); border-radius: 20px; padding: 16px 20px; font-size: .9375rem; line-height: 1.5; color: #fff; }
+    .instalar b { color: #FFD9DF; }
+    .instalar p { margin: 0 0 8px; }
+  </style>
+</head>
+<body>
+  <img src="icone-192.png" alt="">
+  <h1>Nosso Plano</h1>
+  <a id="abrir" href="https://script.google.com/macros/s/AKfycbzYi7IfwHuukw-dRbeLbNP3ij3sutvdn3PoiHZ7ZPYI-3lu1psdh_QMF6200XQ5M0tlsA/exec">Abrindo… toque aqui se não abrir</a>
+  <div class="instalar" id="instalar" hidden>
+    <p><b>Para colocar na tela inicial:</b></p>
+    <p><b>iPhone (Safari):</b> toque em Compartilhar (quadrado com seta) → <b>Adicionar à Tela de Início</b>.</p>
+    <p><b>Android (Chrome):</b> toque em ⋮ → <b>Adicionar à tela inicial</b>.</p>
+    <p style="margin:0">Depois, é só abrir pelo ícone.</p>
+  </div>
+  <script>
+    // Modo instalação (?instalar): mostra as instruções e limpa o endereço, para o ícone salvo abrir direto o app.
+    // Aberto pelo ícone: redireciona para o app do Google.
+    if (location.search.includes('instalar')) {
+      history.replaceState(null, '', location.pathname);
+      document.getElementById('instalar').hidden = false;
+      document.getElementById('abrir').textContent = 'Abrir o app agora';
+    } else {
+      setTimeout(() => location.replace(document.getElementById('abrir').href), 400);
+    }
+  </script>
+</body>
+</html>
