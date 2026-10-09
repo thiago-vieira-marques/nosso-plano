@@ -8,37 +8,40 @@
   <meta name="apple-mobile-web-app-title" content="Nosso Plano">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icone-192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <style>
-    body { margin: 0; min-height: 100vh; display: grid; place-content: center; text-align: center; gap: 16px;
+    body { margin: 0; min-height: 100vh; display: grid; place-content: center; text-align: center; gap: 16px; padding: 24px 16px; box-sizing: border-box;
       background: linear-gradient(135deg, #9C5679, #5E2944); color: #FFD8E6; font-family: Roboto, system-ui, sans-serif; }
     img { width: 96px; height: 96px; border-radius: 24px; margin: 0 auto; box-shadow: 0 4px 16px rgb(0 0 0 / .3); }
     h1 { margin: 0; font-size: 1.5rem; font-weight: 600; color: #fff; }
-    a { color: #FFD8E6; font-size: .9375rem; }
-    .instalar { max-width: 320px; margin: 8px auto 0; text-align: left; background: rgb(255 255 255 / .12); border-radius: 20px; padding: 16px 20px; font-size: .9375rem; line-height: 1.5; color: #fff; }
+    .abrir { display: inline-block; margin: 0 auto; padding: 14px 28px; border-radius: 28px; background: #FFD8E6; color: #5E2944; font-weight: 700; text-decoration: none; font-size: 1rem; }
+    .instalar { max-width: 340px; margin: 8px auto 0; text-align: left; background: rgb(255 255 255 / .12); border-radius: 20px; padding: 16px 20px; font-size: .9375rem; line-height: 1.5; color: #fff; }
     .instalar b { color: #F2BB98; }
-    .instalar p { margin: 0 0 8px; }
+    .instalar p { margin: 0 0 10px; }
+    .instalar p:last-child { margin: 0; }
   </style>
 </head>
 <body>
   <img src="icone-192.png" alt="">
   <h1>Nosso Plano</h1>
-  <a id="abrir" href="https://script.google.com/macros/s/AKfycbzYi7IfwHuukw-dRbeLbNP3ij3sutvdn3PoiHZ7ZPYI-3lu1psdh_QMF6200XQ5M0tlsA/exec">Abrindo… toque aqui se não abrir</a>
-  <div class="instalar" id="instalar" hidden>
-    <p><b>Para colocar na tela inicial:</b></p>
+  <a class="abrir" id="abrir" href="https://script.google.com/macros/s/AKfycbzYi7IfwHuukw-dRbeLbNP3ij3sutvdn3PoiHZ7ZPYI-3lu1psdh_QMF6200XQ5M0tlsA/exec">Abrir o Nosso Plano</a>
+  <div class="instalar" id="instalar">
+    <p><b>Para colocar na tela inicial, faça nesta página</b> (não toque em "Abrir"):</p>
+    <p><b>Android (Chrome):</b> toque em ⋮ → <b>Instalar app</b> → Instalar.</p>
     <p><b>iPhone (Safari):</b> toque em Compartilhar (quadrado com seta) → <b>Adicionar à Tela de Início</b>.</p>
-    <p><b>Android (Chrome):</b> toque em ⋮ → <b>Instalar app</b> (ou "Adicionar à tela inicial" → <b>Instalar</b>).</p>
-    <p style="margin:0">Depois, é só abrir pelo ícone.</p>
+    <p>Depois, abra sempre pelo ícone.</p>
   </div>
   <script>
-    // Modo instalação (?instalar): mostra as instruções e limpa o endereço, para o ícone salvo abrir direto o app.
-    // Aberto pelo ícone: redireciona para o app do Google.
-    if (location.search.includes('instalar')) {
-      history.replaceState(null, '', location.pathname);
-      document.getElementById('instalar').hidden = false;
-      document.getElementById('abrir').textContent = 'Abrir o app agora';
-    } else {
-      setTimeout(() => location.replace(document.getElementById('abrir').href), 400);
+    // Só redireciona quando aberto pelo ícone (app instalado no Android ou atalho do iPhone).
+    // No navegador comum a página fica parada, para o celular instalar o ícone desta página, e não o do Google.
+    const instalado = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+    const iphoneAtalho = /iPhone|iPad/.test(navigator.userAgent) && !location.search.includes('instalar') && document.referrer === '';
+    if (location.search.includes('instalar')) history.replaceState(null, '', location.pathname);
+    if (instalado || iphoneAtalho) {
+      document.getElementById('instalar').hidden = true;
+      document.getElementById('abrir').textContent = 'Abrindo…';
+      setTimeout(() => location.replace(document.getElementById('abrir').href), 300);
     }
   </script>
 </body>
